@@ -5,9 +5,9 @@ import { deleteElement } from './elementsSlice';
 
 interface PagesState {
   entities: {
-    [key: string]: Page;
+    [key: string]: Page; // key is page id(type string) and it has a property of Page Type
   };
-  selectedPageId: string | null;
+  selectedPageId: string | null; // Currently selected page id in redux store
 }
 
 
@@ -36,6 +36,7 @@ const pagesSlice = createSlice({
     selectPage: (state, action: PayloadAction<string>) => {
       state.selectedPageId = action.payload;
     },
+    // createPage is used in createPageAsync
     createPage: (state, action: PayloadAction<Page>) => {
       state.entities[action.payload.id] = action.payload;
 
@@ -49,6 +50,7 @@ const pagesSlice = createSlice({
         state.entities[pageId].elements.forEach(elementId => {
           deleteElement(elementId);
         });
+        // And delete the page itself
         delete state.entities[pageId];
       }
     },
@@ -61,6 +63,7 @@ const pagesSlice = createSlice({
     removeElementFromPage: (state, action: PayloadAction<{ pageId: string; elementId: string }>) => {
       const { pageId, elementId } = action.payload;
       if (state.entities[pageId]) {
+        // Filter will create new array with all elements except the one with elementId that wants to be removed
         state.entities[pageId].elements = state.entities[pageId].elements.filter(id => id !== elementId);
       }
     },
@@ -70,7 +73,7 @@ const pagesSlice = createSlice({
         state.entities[pageId].name = name;
       }
     },
-    // more reducers here
+    // more reducers bellow
   },
 });
 

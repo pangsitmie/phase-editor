@@ -11,7 +11,7 @@ export interface Element {
     opacity: number;
     color: string;
     children?: string[]; // IDs of child elements
-    parentId?: string;  // Parent element ID
+    parentId?: string;  // Parent element ID (top level element doesnt require this)
     pageId?: string;   // Page ID the element is located on
 }
 export interface BlockProps {

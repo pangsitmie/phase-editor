@@ -48,6 +48,9 @@ const RightPanel = () => {
         if (selectedElement) {
             dispatch(updateElementX({ elementId: selectedElement.id, x: newX }));
         }
+        else {
+            console.log("selectedElement is null");
+        }
     };
 
     const handleYChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,6 +59,9 @@ const RightPanel = () => {
 
         if (selectedElement) {
             dispatch(updateElementY({ elementId: selectedElement.id, y: newY }));
+        }
+        else {
+            console.log("selectedElement is null");
         }
     };
 
@@ -92,7 +98,7 @@ const RightPanel = () => {
             </div>
             <div className="mb-4">
                 <H4 className="mb-4">Position</H4>
-                <div className="mb-3 flex items-center justify-between">
+                <div className="mb-3 flex items-center justify-between gap-4">
                     <div className="mb-3 flex items-center justify-between">
                         <span className="mr-2">X</span>
                         <StyledInput type="number" min={0} max={999} value={x} onChange={handleXChange} />

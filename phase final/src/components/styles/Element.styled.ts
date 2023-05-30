@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledElement = styled.button`
+export const StyledElement = styled.div`
     width: 100%;
     padding: 0.5rem;
     margin-bottom: 0.5rem;

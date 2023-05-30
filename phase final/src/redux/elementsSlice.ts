@@ -58,7 +58,7 @@ const elementsSlice = createSlice({
     name: 'elements',
     initialState,
     reducers: {
-        selectElement: (state, action: PayloadAction<string>) => {
+        selectElement: (state, action: PayloadAction<string | null>) => {
             state.selectedElementId = action.payload;
         },
         createElement: (state, action: PayloadAction<{ newElement: Element, parentId?: string }>) => {
@@ -95,6 +95,11 @@ const elementsSlice = createSlice({
 
                 // Delete the element
                 delete state.entities[elementId];
+
+                // If the deleted element was the selected one, unselect it
+                if (state.selectedElementId === elementId) {
+                    selectElement(null);
+                }
             }
         },
         renameElement: (state, action: PayloadAction<{ elementId: string; name: string }>) => {

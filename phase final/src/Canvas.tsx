@@ -4,7 +4,7 @@ import { AppDispatch } from "./redux/store";
 import { selectElement, updateElement } from "./redux/elementsSlice";
 import { Block } from "./components/styles/Block.styled";
 import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
-import React, { useRef } from "react";
+import React from "react";
 import { RootState } from "./redux/reducers";
 
 
@@ -18,7 +18,7 @@ const CanvasWrapper = styled.div`
 const Canvas = () => {
   const dispatch: AppDispatch = useDispatch();
 
-  const elementRef = useRef(null);
+  let refs: Record<string, React.RefObject<HTMLDivElement>> = {};
 
   const selectedPageId = useSelector((state: RootState) => state.pages.selectedPageId);
   const selectedPage = useSelector((state: RootState) => selectedPageId ? state.pages.entities[selectedPageId] : null);
@@ -47,15 +47,21 @@ const Canvas = () => {
       return null;
     }
 
+    // Assign a ref to each element id if it doesn't exist already
+    if (!refs[elementId]) {
+      refs[elementId] = React.createRef();
+    }
+
+
     return (
       <React.Fragment key={element.id}>
         <Draggable
-          nodeRef={elementRef}
+          nodeRef={refs[element.id]} // Each individual element has its own ref
           onDrag={(e, ui) => handleElementDrag(e, ui, element.id)}
           position={{ x: element.x, y: element.y }}
         >
           <Block
-            ref={elementRef}
+            ref={refs[element.id]} // Each individual element has its own ref
             o={element.opacity}
             selected={element.id === selectedElementId}
             color={element.color}
