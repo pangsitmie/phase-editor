@@ -53,7 +53,7 @@ const Canvas = () => {
         <Draggable
           key={element.id}
           nodeRef={elementRef} // This is for prevent error in react dragable
-          onDrag={(e, ui) => handleElementDrag(e, ui, element.id)}
+          onDrag={(e: any, ui: any) => handleElementDrag(e, ui, element.id)}
           position={{ x: element.x, y: element.y }}
         >
           <Block

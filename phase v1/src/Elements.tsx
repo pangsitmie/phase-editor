@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { AppDispatch, RootState } from "./redux/store";
-// import { selectElement } from "./redux/elementsSlice";
 import { StyledElement } from "./components/styles/Element.styled";
 import { StyledAddButton } from "./components/styles/AddButton.styled";
 import { H4 } from "./components/styles/H4.styled";
