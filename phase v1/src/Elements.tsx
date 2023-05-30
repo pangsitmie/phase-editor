@@ -2,15 +2,15 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
-import { AppDispatch, RootState, createElementAndSelect } from "./redux/store";
-import { selectElement } from "./redux/elementsSlice";
+import { AppDispatch, RootState } from "./redux/store";
+// import { selectElement } from "./redux/elementsSlice";
 import { StyledElement } from "./components/styles/Element.styled";
 import { StyledAddButton } from "./components/styles/AddButton.styled";
 import { H4 } from "./components/styles/H4.styled";
 import { Element, Page } from "./interfaces";
 import { TbCircleDashed } from 'react-icons/tb';
 import { StyledInput } from "./components/styles/Input.styled";
-import { updateElementName } from "./redux/pagesSlice";
+import { createElement, selectElement, updateElementName } from "./redux/pagesSlice";
 
 
 const ElementsWrapper = styled.div`
@@ -28,7 +28,7 @@ const Elements = () => {
     const selectedPage = pages.find((page: Page) => page.id === selectedPageId);
 
     // Get the currently selected element
-    const selectedElementId = useSelector((state: RootState) => state.elements.selectedElementId) || null;
+    const selectedElementId = useSelector((state: RootState) => state.pages.selectedElementId) || null;
 
 
     // If there's no selected page, render a message
@@ -40,7 +40,7 @@ const Elements = () => {
 
     const handleCreateElement = () => {
         if (selectedPage) {
-            dispatch(createElementAndSelect(selectedPage.id));
+            dispatch(createElement(selectedPage.id));
         }
     };
 

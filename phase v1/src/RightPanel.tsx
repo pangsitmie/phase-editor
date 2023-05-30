@@ -1,5 +1,3 @@
-// RightPanel.tsx
-
 import styled from "styled-components";
 import ColorPicker from "./components/ColorPicker";
 import { AppDispatch, RootState } from "./redux/store";
@@ -24,7 +22,7 @@ const Label = styled.label`
 const RightPanel = () => {
     const dispatch: AppDispatch = useDispatch();
 
-    const selectedElementId = useSelector((state: RootState) => state.elements.selectedElementId);
+    const selectedElementId = useSelector((state: RootState) => state.pages.selectedElementId);
     const selectedPageId = useSelector((state: RootState) => state.pages.selectedPageId);
 
     const selectedPage = useSelector((state: RootState) => state.pages.list.find(page => page.id === selectedPageId));
@@ -42,13 +40,6 @@ const RightPanel = () => {
             setOpacity(selectedElement.opacity);
         }
     }, [selectedElement]);
-
-    // These useEffect hooks will log the new X and Y values whenever they change
-    // useEffect(() => {
-    //     console.log('New X:', x);
-    //     console.log('New Y:', y);
-    //     console.log('New Opacity:', opacity);
-    // }, [x, y, opacity]);
 
     const handleXChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newX = Number(e.target.value);

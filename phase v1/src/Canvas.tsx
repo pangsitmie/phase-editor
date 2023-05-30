@@ -1,11 +1,10 @@
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "./redux/store";
-import { selectElement } from "./redux/elementsSlice";
 import { Block } from "./components/styles/Block.styled";
 import { Element, Page } from "./interfaces";
 import Draggable, { DraggableData, DraggableEvent } from "react-draggable";
-import { updateElementPosition } from "./redux/pagesSlice";
+import { selectElement, updateElementPosition } from "./redux/pagesSlice";
 import { useRef } from "react";
 
 
@@ -26,7 +25,7 @@ const Canvas = () => {
   const selectedPageId = useSelector((state: RootState) => state.pages.selectedPageId);
   const selectedPage = useSelector((state: RootState) => state.pages.list.find((page: Page) => page.id === selectedPageId));
 
-  const selectedElementId = useSelector((state: RootState) => state.elements.selectedElementId) || null;
+  const selectedElementId = useSelector((state: RootState) => state.pages.selectedElementId) || null;
 
 
   // inside the Elements component

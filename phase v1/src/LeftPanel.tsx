@@ -28,29 +28,6 @@ const LeftPanel = () => {
 
             <Pages />
             <Elements />
-
-            {/* render the selected Page and selected emelemnt in the redux store */}
-            {/* <div>
-                <br />
-
-                <H4>
-                    Selected Page:{selectedPage?.name || "No page selected"}
-                </H4>
-
-                <br />
-
-                <H4>
-                    Element:{selectedElement?.name || "No element selected"}
-                    <br />
-                    ID:{selectedElement?.id || "No element selected"}
-                    <br />
-                    X: {selectedElement?.x}
-                    <br />
-                    Y: {selectedElement?.y}
-                    <br />
-                    Color: {selectedElement?.color}
-                </H4>
-            </div> */}
         </LeftPanelWrapper>
     )
 }

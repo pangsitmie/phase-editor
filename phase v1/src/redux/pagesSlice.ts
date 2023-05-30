@@ -1,10 +1,10 @@
-// src/redux/pagesSlice.ts
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Page } from '../interfaces';
 
 interface PagesState {
   list: Page[];
   selectedPageId: string | null;
+  selectedElementId: string | null;
 }
 
 
@@ -30,6 +30,7 @@ const initialState: PagesState = {
     },
   ],
   selectedPageId: '1',
+  selectedElementId: null,
 };
 
 const pagesSlice = createSlice({
@@ -53,8 +54,8 @@ const pagesSlice = createSlice({
       //update the selectedPageId to the newly created page
       state.selectedPageId = newPage.id;
     },
-    createElement: (state, action: PayloadAction<{ pageId: string, color: string }>) => {
-      const pageIndex = state.list.findIndex(page => page.id === action.payload.pageId);
+    createElement: (state, action: PayloadAction<string>) => {
+      const pageIndex = state.list.findIndex(page => page.id === action.payload);
       if (pageIndex !== -1) {
         const newElement = {
           id: (state.list[pageIndex].elements.length + 1).toString(),
@@ -62,9 +63,18 @@ const pagesSlice = createSlice({
           x: 100,
           y: 100,
           opacity: 1,
-          color: action.payload.color,
+          color: "#111111",
         };
         state.list[pageIndex].elements = [...state.list[pageIndex].elements, newElement];
+      }
+    },
+    selectElement: (state, action: PayloadAction<string>) => {
+      state.selectedElementId = action.payload;
+
+      //update the selectedPageId to the page that contains the selected element
+      const pageIndex = state.list.findIndex(page => page.elements.find(element => element.id === action.payload));
+      if (pageIndex !== -1) {
+        state.selectedElementId = state.list[pageIndex].elements.find(element => element.id === action.payload)?.id || null;
       }
     },
     updatePageName: (state, action: PayloadAction<{ id: string, name: string }>) => {
@@ -137,6 +147,7 @@ export const {
   selectPage,
   createPage,
   createElement,
+  selectElement,
   updatePageName,
   updateElementName,
   updateElementX,
