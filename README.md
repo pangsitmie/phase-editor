@@ -3,8 +3,10 @@
 Phase-Editor is a web application project built with React, TypeScript, Vite, Tailwind CSS, Styled Components, Redux, and tested with Jest & Babel. 
 The project is divided into two main directories: v1 and final. 
 
-- **v1** - This is the initial version of the application, which does not support nested elements feature. 
 - **final** - This is the final version of the application with support for nested elements feature.
+
+- **v1** - This is the initial version of the application, which does not support nested elements feature. 
+- link to v1: https://github.com/pangsitmie/Websites/tree/main/phase-editor-v1
 
 ## How to Start the Application
 
